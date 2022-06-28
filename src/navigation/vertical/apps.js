@@ -1,8 +1,29 @@
-import { Mail, MessageSquare, CheckSquare, Calendar, FileText, Circle, ShoppingCart, User } from 'react-feather'
+import {
+  Mail,
+  MessageSquare,
+  CheckSquare,
+  Calendar,
+  FileText,
+  Circle,
+  ShoppingCart,
+  User
+} from 'react-feather'
 
 export default [
   {
     header: 'Apps & Pages'
+  },
+  {
+    id: 'shop',
+    title: 'Quản lý loại sản phẩm',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/shop1'
+  },
+  {
+    id: 'shop',
+    title: 'Quản lý sản phẩm',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/shop'
   },
   {
     id: 'email',
@@ -59,6 +80,7 @@ export default [
       }
     ]
   },
+
   {
     id: 'eCommerce',
     title: 'eCommerce',

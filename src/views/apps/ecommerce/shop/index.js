@@ -7,7 +7,7 @@ import Products from './Products'
 
 // ** Custom Components
 import Breadcrumbs from '@components/breadcrumbs'
-
+import apiCall from '../../../../service/index'
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -29,7 +29,7 @@ const Shop = () => {
 
   // ** Vars
   const dispatch = useDispatch()
-  const store = useSelector(state => state.ecommerce)
+  const store = useSelector((state) => state.ecommerce)
 
   // ** Get products
   useEffect(() => {
@@ -45,7 +45,11 @@ const Shop = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Shop' breadCrumbParent='eCommerce' breadCrumbActive='Shop' />
+      <Breadcrumbs
+        breadCrumbTitle="Shop"
+        breadCrumbParent="eCommerce"
+        breadCrumbActive="Shop"
+      />
       <Products
         store={store}
         dispatch={dispatch}

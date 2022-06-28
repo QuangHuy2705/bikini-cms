@@ -86,7 +86,7 @@ const AppRoutes = [
   {
     path: '/apps/invoice/preview',
     exact: true,
-    component: () => <Redirect to='/apps/invoice/preview/4987' />
+    component: () => <Redirect to="/apps/invoice/preview/4987" />
   },
   {
     path: '/apps/invoice/edit/:id',
@@ -98,7 +98,7 @@ const AppRoutes = [
   {
     path: '/apps/invoice/edit',
     exact: true,
-    component: () => <Redirect to='/apps/invoice/edit/4987' />
+    component: () => <Redirect to="/apps/invoice/edit/4987" />
   },
   {
     path: '/apps/invoice/add',
@@ -115,6 +115,11 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/ecommerce/shop'))
   },
   {
+    path: '/apps/ecommerce/shop1',
+    className: 'ecommerce-application',
+    component: lazy(() => import('../../views/apps/ecommerce/shop/index2.js'))
+  },
+  {
     path: '/apps/ecommerce/wishlist',
     className: 'ecommerce-application',
     component: lazy(() => import('../../views/apps/ecommerce/wishlist'))
@@ -123,7 +128,9 @@ const AppRoutes = [
     path: '/apps/ecommerce/product-detail',
     exact: true,
     className: 'ecommerce-application',
-    component: () => <Redirect to='/apps/ecommerce/product-detail/apple-i-phone-11-64-gb-black-26' />
+    component: () => (
+      <Redirect to="/apps/ecommerce/product-detail/apple-i-phone-11-64-gb-black-26" />
+    )
   },
   {
     path: '/apps/ecommerce/product-detail/:product',
@@ -146,7 +153,7 @@ const AppRoutes = [
   {
     path: '/apps/user/edit',
     exact: true,
-    component: () => <Redirect to='/apps/user/edit/1' />
+    component: () => <Redirect to="/apps/user/edit/1" />
   },
   {
     path: '/apps/user/edit/:id',
@@ -158,7 +165,7 @@ const AppRoutes = [
   {
     path: '/apps/user/view',
     exact: true,
-    component: () => <Redirect to='/apps/user/view/1' />
+    component: () => <Redirect to="/apps/user/view/1" />
   },
   {
     path: '/apps/user/view/:id',
