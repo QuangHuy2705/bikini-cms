@@ -23,31 +23,9 @@ const CategoryManagement = () => {
   const toggleDelete = () => setDelete(!deleteShown)
   const toggleEdit = () => setEdit(!editShown)
   const getCat = async () => {
-    const res = await fetch('get', '/v1/category')
+    const res = await fetch('get', '/v1/size')
     if (res.length > 0) {
-      const processed = res.reduce((acc, curr) => {
-        if (!curr.parent) {
-          if (!acc[curr.id]) {
-            acc[curr.id] = curr
-          }
-        } else {
-          if (!acc[curr.parent.id]) {
-            console.log(curr.parent)
-            acc[curr.parent.id] = {
-              ...curr.parent,
-              children: [curr]
-            }
-          } else {
-            if (!acc[curr.parent.id].children) {
-              acc[curr.parent.id].children = [curr]
-            } else {
-              acc[curr.parent.id].children.push(curr)
-            }
-          }
-        }
-        return acc
-      }, {})
-      setData(processed)
+      setData(res)
     }
   }
   useEffect(() => {
@@ -103,9 +81,7 @@ const CategoryManagement = () => {
       <div
         style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}
       >
-        <h1 style={{ paddingRight: '10px', margin: 0 }}>
-          Quản lý loại sản phẩm
-        </h1>
+        <h1 style={{ paddingRight: '10px', margin: 0 }}>Quản lý size</h1>
         <Plus
           onClick={() => onOpenCreate(null)}
           style={{ cursor: 'pointer' }}
@@ -128,21 +104,15 @@ const CategoryManagement = () => {
                 position: 'relative'
               }}
             >
-              <p style={{ margin: 0 }}>{catData[c].name['vn']}</p>
+              <p style={{ margin: 0 }}>{catData[c].name}</p>
               <div
                 style={{
                   position: 'absolute',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  right: '-80px'
+                  right: '-60px'
                 }}
               >
-                <Plus
-                  onClick={() => onOpenCreate(catData[c].id)}
-                  style={{ cursor: 'pointer' }}
-                  color="#28C76F"
-                  size={20}
-                />
                 <MinusCircle
                   onClick={() => onDeleteOpen(catData[c])}
                   style={{ cursor: 'pointer', marginLeft: '5px' }}
@@ -157,51 +127,6 @@ const CategoryManagement = () => {
                 />
               </div>
             </div>
-            {catData[c].children?.length > 0 &&
-              catData[c].children.map((ch) => (
-                <div
-                  key={ch.id}
-                  style={{
-                    maxWidth: '100px',
-                    padding: '8px 10px',
-                    textAlign: 'center',
-                    background: '#fff',
-                    borderRadius: '0.428rem',
-                    boxShadow: '0 4px 24px 0 rgb(34 41 47 / 10%)',
-                    marginLeft: 40,
-                    marginBottom: 10,
-                    position: 'relative'
-                  }}
-                >
-                  <p style={{ margin: 0 }}>{ch.name['en']}</p>
-                  <MinusCircle
-                    onClick={() => onDeleteOpen(ch)}
-                    style={{
-                      cursor: 'pointer',
-                      marginLeft: '5px',
-                      position: 'absolute',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      right: '-30px'
-                    }}
-                    color="#EA5455"
-                    size={20}
-                  />
-                  <Edit2
-                    onClick={() => onEditOpen(ch)}
-                    style={{
-                      cursor: 'pointer',
-                      marginLeft: '5px',
-                      position: 'absolute',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      right: '-60px'
-                    }}
-                    color="#fcdf03"
-                    size={20}
-                  />
-                </div>
-              ))}
           </div>
         ))}
     </div>

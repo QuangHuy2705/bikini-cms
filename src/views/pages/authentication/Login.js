@@ -11,27 +11,18 @@ import { AbilityContext } from '@src/utility/context/Can'
 import { Link, useHistory } from 'react-router-dom'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
+import { fetch } from '../../../service/index'
+import { Coffee } from 'react-feather'
 import {
-  Facebook,
-  Twitter,
-  Mail,
-  GitHub,
-  HelpCircle,
-  Coffee
-} from 'react-feather'
-import {
-  Alert,
   Row,
   Col,
   CardTitle,
-  CardText,
   Form,
   Input,
   FormGroup,
   Label,
   CustomInput,
-  Button,
-  UncontrolledTooltip
+  Button
 } from 'reactstrap'
 
 import '@styles/base/pages/page-auth.scss'
@@ -58,35 +49,65 @@ const Login = (props) => {
   const ability = useContext(AbilityContext)
   const dispatch = useDispatch()
   const history = useHistory()
-  const [email, setEmail] = useState('admin@demo.com')
-  const [password, setPassword] = useState('admin')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
     source = require(`@src/assets/images/pages/${illustration}`).default
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (isObjEmpty(errors)) {
-      useJwt
-        .login({ email, password })
-        .then((res) => {
-          const data = {
-            ...res.data.userData,
-            accessToken: res.data.accessToken,
-            refreshToken: res.data.refreshToken
-          }
-          dispatch(handleLogin(data))
-          ability.update(res.data.userData.ability)
-          history.push(getHomeRouteForLoggedInUser(data.role))
-          toast.success(
-            <ToastContent
-              name={data.fullName || data.username || 'John Doe'}
-              role={data.role || 'admin'}
-            />,
-            { transition: Slide, hideProgressBar: true, autoClose: 2000 }
-          )
-        })
-        .catch((err) => console.log(err))
+      const res = await fetch('post', '/v1/auth/login', {
+        email,
+        password
+      })
+      console.log(res)
+      if (res) {
+        const data = {
+          ...res.user,
+          ability: [
+            {
+              action: 'manage',
+              subject: 'all'
+            }
+          ],
+          role: 'admin',
+          accessToken: res.tokens.access.token,
+          refreshToken: res.tokens.refresh.token
+        }
+        dispatch(handleLogin(data))
+        ability.update([{ action: 'manage', subject: 'all' }])
+        history.push(getHomeRouteForLoggedInUser('admin'))
+        toast.success(
+          <ToastContent
+            name={data.name || 'John Doe'}
+            role={data.role || 'admin'}
+          />,
+          { transition: Slide, hideProgressBar: true, autoClose: 2000 }
+        )
+      }
+
+      // useJwt
+      //   .login({ email, password })
+      //   .then((res) => {
+      //     const data = {
+      //       ...res.data.userData,
+      //       accessToken: res.data.accessToken,
+      //       refreshToken: res.data.refreshToken
+      //     }
+      //     dispatch(handleLogin(data))
+      //     ability.update(res.data.userData.ability)
+      //     history.push(getHomeRouteForLoggedInUser(data.role))
+      //     toast.success(
+      //       <ToastContent
+      //         name={data.fullName || data.username || 'John Doe'}
+      //         role={data.role || 'admin'}
+      //       />,
+      //       { transition: Slide, hideProgressBar: true, autoClose: 2000 }
+      //     )
+      //   })
+      //   .catch((err) => console.log(err))
     }
   }
 
@@ -202,14 +223,14 @@ const Login = (props) => {
                 />
               </FormGroup>
               <FormGroup>
-                <div className="d-flex justify-content-between">
+                {/* <div className="d-flex justify-content-between">
                   <Label className="form-label" for="login-password">
                     Password
                   </Label>
                   <Link to="/forgot-password">
                     <small>Forgot Password?</small>
                   </Link>
-                </div>
+                </div> */}
                 <InputPasswordToggle
                   value={password}
                   id="login-password"

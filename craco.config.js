@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const config = {
   reactScriptsVersion: 'react-scripts',
@@ -25,7 +26,12 @@ const config = {
       '@configs': path.resolve(__dirname, 'src/configs'),
       '@utils': path.resolve(__dirname, 'src/utility/Utils'),
       '@hooks': path.resolve(__dirname, 'src/utility/hooks')
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('development')
+      })
+    ]
   }
 }
 
@@ -33,7 +39,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   config.devServer = {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:5000/',
         secure: false,
         changeOrigin: true,
         logLevel: 'info',

@@ -14,127 +14,39 @@ export default [
     header: 'Apps & Pages'
   },
   {
-    id: 'shop',
+    id: 'shop1',
     title: 'Quản lý loại sản phẩm',
     icon: <Circle size={12} />,
     navLink: '/apps/ecommerce/shop1'
   },
   {
-    id: 'shop',
+    id: 'product-management',
     title: 'Quản lý sản phẩm',
     icon: <Circle size={12} />,
-    navLink: '/apps/ecommerce/shop'
+    navLink: '/apps/ecommerce/product'
   },
   {
-    id: 'email',
-    title: 'Email',
-    icon: <Mail size={20} />,
-    navLink: '/apps/email'
+    id: 'production-create',
+    title: 'Tạo sản phẩm mới',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/create/product'
   },
   {
-    id: 'chat',
-    title: 'Chat',
-    icon: <MessageSquare size={20} />,
-    navLink: '/apps/chat'
+    id: 'size-manage',
+    title: 'Quản lý size',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/size'
   },
   {
-    id: 'todo',
-    title: 'Todo',
-    icon: <CheckSquare size={20} />,
-    navLink: '/apps/todo'
+    id: 'shipping-manage',
+    title: 'Quản lý shipping',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/shipping'
   },
   {
-    id: 'calendar',
-    title: 'Calendar',
-    icon: <Calendar size={20} />,
-    navLink: '/apps/calendar'
-  },
-  {
-    id: 'invoiceApp',
-    title: 'Invoice',
-    icon: <FileText size={20} />,
-    children: [
-      {
-        id: 'invoiceList',
-        title: 'List',
-        icon: <Circle size={12} />,
-        navLink: '/apps/invoice/list'
-      },
-      {
-        id: 'invoicePreview',
-        title: 'Preview',
-        icon: <Circle size={12} />,
-        navLink: '/apps/invoice/preview'
-      },
-      {
-        id: 'invoiceEdit',
-        title: 'Edit',
-        icon: <Circle size={12} />,
-        navLink: '/apps/invoice/edit'
-      },
-      {
-        id: 'invoiceAdd',
-        title: 'Add',
-        icon: <Circle size={12} />,
-        navLink: '/apps/invoice/add'
-      }
-    ]
-  },
-
-  {
-    id: 'eCommerce',
-    title: 'eCommerce',
-    icon: <ShoppingCart size={20} />,
-    children: [
-      {
-        id: 'shop',
-        title: 'Shop',
-        icon: <Circle size={12} />,
-        navLink: '/apps/ecommerce/shop'
-      },
-      {
-        id: 'detail',
-        title: 'Details',
-        icon: <Circle size={12} />,
-        navLink: '/apps/ecommerce/product-detail'
-      },
-      {
-        id: 'wishList',
-        title: 'Wish List',
-        icon: <Circle size={12} />,
-        navLink: '/apps/ecommerce/wishlist'
-      },
-      {
-        id: 'checkout',
-        title: 'Checkout',
-        icon: <Circle size={12} />,
-        navLink: '/apps/ecommerce/checkout'
-      }
-    ]
-  },
-  {
-    id: 'users',
-    title: 'User',
-    icon: <User size={20} />,
-    children: [
-      {
-        id: 'list',
-        title: 'List',
-        icon: <Circle size={12} />,
-        navLink: '/apps/user/list'
-      },
-      {
-        id: 'view',
-        title: 'View',
-        icon: <Circle size={12} />,
-        navLink: '/apps/user/view'
-      },
-      {
-        id: 'edit',
-        title: 'Edit',
-        icon: <Circle size={12} />,
-        navLink: '/apps/user/edit'
-      }
-    ]
+    id: 'order-manage',
+    title: 'Quản lý order',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/order'
   }
 ]

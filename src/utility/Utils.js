@@ -50,7 +50,7 @@ export const formatDateToMonthShort = (value, toTimeForCurrentDay = true) => {
 }
 
 export const apiErrorToast = (msg) => {
-  toast.error(msg, TOAST_OPTIONS)
+  toast.error(msg)
 }
 /**
  ** Return if user is logged in

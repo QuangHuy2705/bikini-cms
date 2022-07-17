@@ -6,24 +6,26 @@ import ReactPaginate from 'react-paginate'
 
 // ** Styles
 import '@styles/base/pages/app-ecommerce.scss'
-import { Row, Col, CardText, Card } from 'reactstrap'
+import { Row } from 'reactstrap'
 import { PlusCircle as Plus, MinusCircle, Edit2, XCircle } from 'react-feather'
-import CreateModal from './CreateCatModel'
-import EditModal from './EditModal'
 import DeleteModal from './DeleteModal'
 import Spinner from '@src/@core/components/spinner/Fallback-spinner'
 import styles from './production.module.scss'
+import { useHistory } from 'react-router-dom'
 
 const ProductManagement = () => {
   const [prodData, setData] = useState([])
   const [createShown, setCreate] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(18)
-  const [currParent, setParent] = useState('')
+  const [deleteShown, setDelete] = useState(false)
+  const [editShown, setEdit] = useState(false)
   const toggleCreate = () => setCreate(!createShown)
   const toggleDelete = () => setDelete(!deleteShown)
   const toggleEdit = () => setEdit(!editShown)
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(0)
+  const [currProd, setCurrProd] = useState({})
+  const history = useHistory()
 
   const getCat = async () => {
     const res = await fetch('get', '/v1/product')
@@ -36,17 +38,18 @@ const ProductManagement = () => {
     getCat()
   }, [])
 
-  const onSetCurrParent = (id) => {
-    setParent(id)
+  const onDeleteOpen = (data) => {
+    setCurrProd(data)
+    setDelete(true)
   }
 
-  const onOpenCreate = (parent) => {
-    onSetCurrParent(parent)
-    setCreate(true)
+  const onEditOpen = (data) => {
+    setCurrProd(data)
+    setEdit(true)
   }
 
   const resetCurr = () => {
-    setCurrCat({})
+    setCurrProd({})
   }
 
   const handlePagination = (page) => {
@@ -57,15 +60,29 @@ const ProductManagement = () => {
   }, [prodData])
 
   const paginatedProd = useMemo(() => {
-    console.log(currentPage)
     return prodData.slice(
       currentPage * rowsPerPage,
       currentPage * rowsPerPage + rowsPerPage
     )
   }, [currentPage, prodData])
 
+  const onNavigate = (id) => {
+    history.push(`/apps/ecommerce/products/${id}`)
+  }
+
+  const onOpenCreate = () => {
+    history.push(`/apps/ecommerce/create/product`)
+  }
+
   return (
     <div>
+      <DeleteModal
+        isShown={deleteShown}
+        getData={getCat}
+        toggleDelete={toggleDelete}
+        data={currProd}
+        resetData={resetCurr}
+      />
       {/* <CreateModal
         getCat={getCat}
         toggleCreate={toggleCreate}
@@ -73,18 +90,12 @@ const ProductManagement = () => {
         currParent={currParent}
         onSetCurrParent={onSetCurrParent}
       />
-      <DeleteModal
-        isShown={deleteShown}
-        getCat={getCat}
-        toggleDelete={toggleDelete}
-        data={currCat}
-        resetData={resetCurr}
-      />
+
       <EditModal
         isShown={editShown}
         getCat={getCat}
         toggleEdit={toggleEdit}
-        data={currCat}
+        data={currProd}
         resetData={resetCurr}
       /> */}
       <div
@@ -123,11 +134,21 @@ const ProductManagement = () => {
                     key={p.id}
                   >
                     <div className={styles['icons-container']}>
-                      <Edit2 style={{ cursor: 'pointer' }} color="#fff" />
-                      <XCircle style={{ cursor: 'pointer' }} color="#fff" />
+                      <Edit2
+                        onClick={() => onNavigate(p.id)}
+                        style={{ cursor: 'pointer' }}
+                        color="#fff"
+                      />
+                      <XCircle
+                        onClick={() => onDeleteOpen(p)}
+                        style={{ cursor: 'pointer' }}
+                        color="#fff"
+                      />
                     </div>
                     <img style={{ width: '100%' }} src={p.image[0]} />
-                    <p style={{ marginTop: '10px' }}>{p.name?.en}</p>
+                    <p
+                      style={{ marginTop: '10px' }}
+                    >{`${p.name?.en} (${p.code})`}</p>
                   </div>
                 )
               })}

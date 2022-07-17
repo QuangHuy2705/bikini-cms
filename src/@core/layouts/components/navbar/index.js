@@ -15,26 +15,26 @@ import NavbarBookmarks from './NavbarBookmarks'
 import { Sun, Moon } from 'react-feather'
 import { NavItem, NavLink } from 'reactstrap'
 
-const ThemeNavbar = props => {
+const ThemeNavbar = (props) => {
   // ** Props
   const { skin, setSkin, setMenuVisibility } = props
 
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
     if (skin === 'dark') {
-      return <Sun className='ficon' onClick={() => setSkin('light')} />
+      return <Sun className="ficon" onClick={() => setSkin('light')} />
     } else {
-      return <Moon className='ficon' onClick={() => setSkin('dark')} />
+      return <Moon className="ficon" onClick={() => setSkin('dark')} />
     }
   }
 
   return (
     <Fragment>
-      <div className='bookmark-wrapper d-flex align-items-center'>
+      <div className="bookmark-wrapper d-flex align-items-center">
         <NavbarBookmarks setMenuVisibility={setMenuVisibility} />
       </div>
-      <ul className='nav navbar-nav align-items-center ml-auto'>
-        <IntlDropdown />
+      <ul className="nav navbar-nav align-items-center ml-auto">
+        {/* <IntlDropdown />
         <NavItem className='d-none d-lg-block'>
           <NavLink className='nav-link-style'>
             <ThemeToggler />
@@ -42,7 +42,7 @@ const ThemeNavbar = props => {
         </NavItem>
         <NavbarSearch />
         <CartDropdown />
-        <NotificationDropdown />
+        <NotificationDropdown /> */}
         <UserDropdown />
       </ul>
     </Fragment>

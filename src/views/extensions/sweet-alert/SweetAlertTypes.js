@@ -1,4 +1,11 @@
-import { Card, CardHeader, CardBody, CardTitle, Button, CardText } from 'reactstrap'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Button,
+  CardText
+} from 'reactstrap'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -56,24 +63,24 @@ const SweetAlertTypes = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Types</CardTitle>
+        <CardTitle tag="h4">Types</CardTitle>
       </CardHeader>
       <CardBody>
-        <CardText className='mb-0'>
-          SweetAlert comes with 4 built-in types which will show a corresponding icon animation: "warning", "error",
-          "success" and "info".
+        <CardText className="mb-0">
+          SweetAlert comes with 4 built-in types which will show a corresponding
+          icon animation: "warning", "error", "success" and "info".
         </CardText>
-        <div className='demo-inline-spacing'>
-          <Button color='success' onClick={handleSuccess} outline>
+        <div className="demo-inline-spacing">
+          <Button color="success" onClick={handleSuccess} outline>
             Success
           </Button>
-          <Button color='danger' onClick={handleError} outline>
+          <Button color="danger" onClick={handleError} outline>
             Error
           </Button>
-          <Button color='warning' onClick={handleWarning} outline>
+          <Button color="warning" onClick={handleWarning} outline>
             Warning
           </Button>
-          <Button color='info' onClick={handleInfo} outline>
+          <Button color="info" onClick={handleInfo} outline>
             Info
           </Button>
         </div>

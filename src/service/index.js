@@ -6,6 +6,14 @@ const axiosClient = axios.create({
   // withCredentials: true
 })
 
+axiosClient.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  let token = localStorage.getItem('accessToken') || ''
+  config.headers['Authorization'] = 'Bearer ' + token.replace(/^"(.*)"$/, '$1')
+
+  return config
+})
+
 const handleResponseError = (response) => {
   const { err, msg_vn, msg_en } = formatResponse(response.data)
   if (err !== 0 && err !== 2402 && err !== 5003) {
@@ -31,9 +39,7 @@ export const fetch = async (
   url,
   params,
   headers = {
-    'Content-type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmE3NTdjMGI1NDk5ZTMwOGFiODQwNDEiLCJpYXQiOjE2NTYxMzQzOTMsImV4cCI6MTY3NDEzNDM5MywidHlwZSI6ImFjY2VzcyJ9.4Unqk4t_ekSmlTaiOfBsOO1x68baN9JXPJy2e7NdhZQ'
+    'Content-type': 'application/json'
   }
 ) => {
   const config = { method, url, headers }
@@ -44,9 +50,23 @@ export const fetch = async (
   let response = null
   try {
     response = await axiosClient(config)
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 
   return response
+}
+
+export const upload = (url, files) => {
+  const formData = new FormData()
+  // for (const [key, file] of Object.entries(files)) {
+  //
+  // }
+  formData.append('images', files)
+
+  return fetch('post', url, formData, {
+    'Content-type': 'multipart/form-data'
+  })
 }
 
 export default axiosClient

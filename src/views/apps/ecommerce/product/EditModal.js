@@ -12,49 +12,47 @@ import {
 } from 'reactstrap'
 import { fetch } from '../../../../service/index'
 
-export default function CreateModal(props) {
-  const { isShown, currParent, onSetCurrParent, toggleCreate, getCat } = props
+export default function EditModal(props) {
+  const { isShown, getCat, resetData, toggleEdit, data } = props
   const [nameEn, setEn] = React.useState('')
   const [namePl, setPl] = React.useState('')
   const [nameVn, setVn] = React.useState('')
-
   const onSubmit = async (e) => {
     e.preventDefault()
-    if (nameEn || namePl || nameVn) {
-      const data = await fetch(
-        'post',
-        '/v1/category',
-        currParent
-          ? {
-              name: {
-                en: nameEn,
-                vn: nameVn,
-                pl: namePl
-              },
-              parent: currParent
-            }
-          : {
-              name: {
-                en: nameEn,
-                vn: nameVn,
-                pl: namePl
-              }
-            }
-      )
-    }
+    const res = await fetch('put', `/v1/category/${data.id}`, {
+      name: {
+        en: nameEn,
+        vn: nameVn,
+        pl: namePl
+      }
+    })
+    resetData()
     getCat()
-    toggleCreate()
+    toggleEdit()
     setEn('')
     setPl('')
     setVn('')
-    onSetCurrParent('')
   }
+
+  React.useEffect(() => {
+    console.log(data)
+    if (data.name?.en) {
+      setEn(data.name?.en)
+    }
+    if (data.name?.vn) {
+      setVn(data.name?.vn)
+    }
+    if (data.name?.pl) {
+      setPl(data.name?.pl)
+    }
+  }, [data])
 
   React.useEffect(() => {
     return () => {
       setEn('')
       setPl('')
       setVn('')
+      resetData()
     }
   }, [])
 
@@ -63,14 +61,16 @@ export default function CreateModal(props) {
       centered
       isOpen={isShown}
       toggle={() => {
-        toggleCreate()
+        resetData()
+        toggleEdit()
         setEn('')
         setPl('')
         setVn('')
-        onSetCurrParent('')
       }}
     >
-      <ModalHeader>Tạo loại sản phẩm mới</ModalHeader>
+      <ModalHeader>
+        Chỉnh sửa <span style={{ fontWeight: 'bold' }}></span>
+      </ModalHeader>
       <ModalBody>
         <Form onSubmit={onSubmit}>
           <Input
