@@ -19,6 +19,7 @@ const handleResponseError = (response) => {
   if (err !== 0 && err !== 2402 && err !== 5003) {
     apiErrorToast(msg_vn || msg_en)
   }
+  console.log()
 }
 
 axiosClient.interceptors.response.use(
