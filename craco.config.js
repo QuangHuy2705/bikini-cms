@@ -39,7 +39,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   config.devServer = {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000/',
+        target: 'https://bikini-cms.herokuapp.com/',
         secure: false,
         changeOrigin: true,
         logLevel: 'info',

@@ -60,7 +60,7 @@ const ProductManagement = () => {
     }
     setCurrProd({
       ...currProd,
-      size: [data[0].name],
+      size: [data[0]?.name],
       category: catData.filter((d) => d.parent)[0]?.id
     })
   }
