@@ -8,7 +8,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(function (config) {
   // Do something before request is sent
-  console.log('deploy')
+  console.log('deploy1')
   let token = localStorage.getItem('accessToken') || ''
   config.headers['Authorization'] = 'Bearer ' + token.replace(/^"(.*)"$/, '$1')
 
