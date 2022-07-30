@@ -2,7 +2,7 @@ import axios from 'axios'
 import { apiErrorToast } from '../utility/Utils'
 
 const axiosClient = axios.create({
-  baseURL: 'https://bikini-server.herokuapp.com'
+  baseURL: 'https://bikini-server-v2.herokuapp.com'
   // withCredentials: true
 })
 
