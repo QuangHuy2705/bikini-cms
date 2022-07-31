@@ -126,21 +126,6 @@ const ProductManagement = () => {
   }
   return (
     <div>
-      {/* <CreateModal
-        getCat={getCat}
-        toggleCreate={toggleCreate}
-        isShown={createShown}
-        currParent={currParent}
-        onSetCurrParent={onSetCurrParent}
-      />
-
-      <EditModal
-        isShown={editShown}
-        getCat={getCat}
-        toggleEdit={toggleEdit}
-        data={currProd}
-        resetData={resetCurr}
-      /> */}
       <div
         style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}
       >

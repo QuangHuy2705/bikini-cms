@@ -3,6 +3,8 @@ import { apiErrorToast } from '../utility/Utils'
 
 const axiosClient = axios.create({
   baseURL: 'https://bikini-server-v2.herokuapp.com'
+  // baseURL: 'http://localhost:5000'
+
   // withCredentials: true
 })
 

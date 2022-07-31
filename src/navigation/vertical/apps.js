@@ -20,6 +20,12 @@ export default [
     navLink: '/apps/ecommerce/shop1'
   },
   {
+    id: 'background',
+    title: 'Quản lý quảng cáo',
+    icon: <Circle size={12} />,
+    navLink: '/apps/ecommerce/background'
+  },
+  {
     id: 'product-management',
     title: 'Quản lý sản phẩm',
     icon: <Circle size={12} />,

@@ -119,6 +119,11 @@ const AppRoutes = [
     className: 'ecommerce-application',
     component: lazy(() => import('../../views/apps/ecommerce/shop/index2.js'))
   },
+  {
+    path: '/apps/ecommerce/background',
+    className: 'ecommerce-application',
+    component: lazy(() => import('../../views/apps/ecommerce/ad_management'))
+  },
 
   {
     path: '/apps/ecommerce/shipping',
