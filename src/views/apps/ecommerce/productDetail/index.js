@@ -142,6 +142,8 @@ const ProductManagement = () => {
     updateProd()
   }
 
+  console.log(currProd)
+
   return (
     <div>
       <DeleteModal
@@ -291,6 +293,21 @@ const ProductManagement = () => {
                       type="text"
                       id="price"
                       placeholder="Giá"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md="4" sm="12">
+                  <FormGroup>
+                    <Label for="quantity">Số lượng</Label>
+                    <Input
+                      value={currProd.quantity}
+                      onChange={(e) => {
+                        onInputChange(e)
+                      }}
+                      name="quantity"
+                      type="text"
+                      id="quantity"
+                      placeholder="Số lượng"
                     />
                   </FormGroup>
                 </Col>
