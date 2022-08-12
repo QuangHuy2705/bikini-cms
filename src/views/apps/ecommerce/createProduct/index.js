@@ -251,6 +251,21 @@ const ProductManagement = () => {
               </Col>
               <Col md="4" sm="12">
                 <FormGroup>
+                  <Label for="quantity">Số lượng</Label>
+                  <Input
+                    value={currProd.quantity}
+                    onChange={(e) => {
+                      onInputChange(e)
+                    }}
+                    name="quantity"
+                    type="text"
+                    id="quantity"
+                    placeholder="Số lượng"
+                  />
+                </FormGroup>
+              </Col>
+              <Col md="4" sm="12">
+                <FormGroup>
                   <Label for="code">Code</Label>
                   <Input
                     value={currProd.code}
